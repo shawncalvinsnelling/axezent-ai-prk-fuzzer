@@ -1,4 +1,5 @@
-name: Axezent AI PRK Green CI
+name: Axezent AI PRK-Fuzzer Green CI
+
 on:
   push:
     branches:
@@ -7,89 +8,151 @@ on:
     branches:
       - main
   workflow_dispatch: {}
+
 jobs:
   python:
-    name: Python checker, fuzzer, and reduction receipts
+    name: Python fuzzer and receipt checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run passing 3SAT-to-CLIQUE receipt
+
+      - name: Install Python test tools
         run: |
-          python prk_checker.py verify passing_3sat_to_clique_receipt.json
-      - name: Confirm bad-edge receipt rejects
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+
+      - name: Verify included valid sample
+        run: |
+          python prk_oracle_checker.py verify sample_generated_valid.json
+
+      - name: Confirm bad-edge sample rejects
         run: |
           set +e
-          python prk_checker.py verify failing_bad_edge_receipt.json
+          python prk_oracle_checker.py verify sample_generated_bad_edge.json
           code=$?
           if [ "$code" -ne 1 ]; then
             echo "Expected bad-edge receipt to reject with exit code 1, got $code"
             exit 1
           fi
-      - name: Confirm bad-k receipt rejects
+
+      - name: Confirm bad-k sample rejects
         run: |
           set +e
-          python prk_checker.py verify failing_bad_k_receipt.json
+          python prk_oracle_checker.py verify sample_generated_bad_k.json
           code=$?
           if [ "$code" -ne 1 ]; then
             echo "Expected bad-k receipt to reject with exit code 1, got $code"
             exit 1
           fi
-      - name: Confirm bad-assignment receipt rejects
+
+      - name: Confirm bad-assignment sample rejects
         run: |
           set +e
-          python prk_checker.py verify failing_bad_assignment_receipt.json
+          python prk_oracle_checker.py verify sample_generated_bad_assignment.json
           code=$?
           if [ "$code" -ne 1 ]; then
             echo "Expected bad-assignment receipt to reject with exit code 1, got $code"
             exit 1
           fi
-      - name: Generate fuzzer smoke receipt
+
+      - name: Confirm illegal-extra-edge sample rejects
         run: |
-          python prk_fuzzer.py generate-valid --variables 4 --clauses 5 --seed 42 --out ci_generated_valid.json
-          python prk_checker.py verify ci_generated_valid.json
-      - name: Generate and verify controlled fuzzer mutations
-        run: |
-          python prk_fuzzer.py mutate-bad-edge ci_generated_valid.json --out ci_bad_edge.json
-          python prk_fuzzer.py mutate-bad-k ci_generated_valid.json --out ci_bad_k.json
-          python prk_fuzzer.py mutate-bad-assignment ci_generated_valid.json --out ci_bad_assignment.json
-          python prk_fuzzer.py mutate-illegal-extra-edge ci_generated_valid.json --out ci_illegal_extra_edge.json
           set +e
-          python prk_checker.py verify ci_bad_edge.json; code=$?; if [ "$code" -ne 1 ]; then exit 1; fi
-          python prk_checker.py verify ci_bad_k.json; code=$?; if [ "$code" -ne 1 ]; then exit 1; fi
-          python prk_checker.py verify ci_bad_assignment.json; code=$?; if [ "$code" -ne 1 ]; then exit 1; fi
-          python prk_checker.py verify ci_illegal_extra_edge.json; code=$?; if [ "$code" -ne 1 ]; then exit 1; fi
-      - name: Run Python unit tests
+          python prk_oracle_checker.py verify sample_generated_illegal_extra_edge.json
+          code=$?
+          if [ "$code" -ne 1 ]; then
+            echo "Expected illegal-extra-edge receipt to reject with exit code 1, got $code"
+            exit 1
+          fi
+
+      - name: Confirm duplicate-clique sample rejects
         run: |
-          python -m unittest -v test_checker.py test_fuzzer.py
+          set +e
+          python prk_oracle_checker.py verify sample_generated_bad_clique_duplicate.json
+          code=$?
+          if [ "$code" -ne 1 ]; then
+            echo "Expected duplicate-clique receipt to reject with exit code 1, got $code"
+            exit 1
+          fi
+
+      - name: Generate valid receipt smoke test
+        run: |
+          python prk_fuzzer.py generate-valid --variables 4 --clauses 5 --seed 42 --out generated_valid.json
+          python prk_oracle_checker.py verify generated_valid.json
+
+      - name: Generate and reject controlled mutations
+        run: |
+          python prk_fuzzer.py mutate-bad-edge generated_valid.json --out generated_bad_edge.json
+          python prk_fuzzer.py mutate-bad-k generated_valid.json --out generated_bad_k.json
+          python prk_fuzzer.py mutate-bad-assignment generated_valid.json --out generated_bad_assignment.json
+          python prk_fuzzer.py mutate-illegal-extra-edge generated_valid.json --out generated_illegal_extra_edge.json
+          python prk_fuzzer.py mutate-bad-clique-duplicate generated_valid.json --out generated_bad_clique_duplicate.json
+
+          set +e
+          python prk_oracle_checker.py verify generated_bad_edge.json
+          code=$?
+          if [ "$code" -ne 1 ]; then exit 1; fi
+
+          python prk_oracle_checker.py verify generated_bad_k.json
+          code=$?
+          if [ "$code" -ne 1 ]; then exit 1; fi
+
+          python prk_oracle_checker.py verify generated_bad_assignment.json
+          code=$?
+          if [ "$code" -ne 1 ]; then exit 1; fi
+
+          python prk_oracle_checker.py verify generated_illegal_extra_edge.json
+          code=$?
+          if [ "$code" -ne 1 ]; then exit 1; fi
+
+          python prk_oracle_checker.py verify generated_bad_clique_duplicate.json
+          code=$?
+          if [ "$code" -ne 1 ]; then exit 1; fi
+
+      - name: Run benchmark smoke test
+        run: |
+          python prk_fuzzer.py benchmark --count 10 --variables 4 --clauses 5 --seed 42
+
+      - name: Run Python tests
+        run: |
+          python -m pytest test_fuzzer.py
+
   rust:
     name: Rust runtime scaffold
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
+
       - name: Run Rust tests
         run: |
           cargo test
+
       - name: Run Rust demo
         run: |
           cargo run
+
   source-audit:
     name: Source audit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - name: Audit sources
         run: |
           python audit_sources.py
