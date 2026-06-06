@@ -1,0 +1,73 @@
+name: Axezent AI PRK-Fuzzer Green CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+jobs:
+  python:
+    name: Python fuzzer, oracle checker, and generated receipts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Python test tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+      - name: Generate valid smoke receipt
+        run: |
+          python prk_fuzzer.py generate-valid --variables 4 --clauses 5 --seed 42 --out generated_valid.json
+      - name: Verify valid smoke receipt accepts
+        run: |
+          python prk_oracle_checker.py verify generated_valid.json
+      - name: Generate and verify controlled rejection smoke receipts
+        run: |
+          python prk_fuzzer.py mutate-bad-edge generated_valid.json --out generated_bad_edge.json
+          set +e
+          python prk_oracle_checker.py verify generated_bad_edge.json
+          code=$?
+          if [ "$code" -ne 1 ]; then
+            echo "Expected bad-edge receipt to reject with exit code 1, got $code"
+            exit 1
+          fi
+      - name: Run Python tests
+        run: |
+          python -m pytest test_fuzzer.py
+      - name: Run fuzzer benchmark smoke test
+        run: |
+          python prk_fuzzer.py benchmark --count 25 --variables 4 --clauses 5 --seed 42
+  rust:
+    name: Rust runtime scaffold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Run Rust tests
+        run: |
+          cargo test
+      - name: Run Rust demo
+        run: |
+          cargo run
+  source-audit:
+    name: Source audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Audit sources
+        run: |
+          python audit_sources.py

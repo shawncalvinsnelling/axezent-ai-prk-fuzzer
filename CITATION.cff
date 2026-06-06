@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: Axezent AI PRK-Fuzzer & Receipt Generator
+message: If you use this software, please cite it using the metadata from this file.
+type: software
+authors:
+  - family-names: Snelling
+    given-names: Shawn Calvin
+repository-code: https://github.com/shawncalvinsnelling/axezent-ai-prk-fuzzer
+license: MIT
+version: 1.0.0

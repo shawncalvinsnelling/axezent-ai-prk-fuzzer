@@ -1,0 +1,12 @@
+[project]
+name = "axezent-ai-prk-fuzzer"
+version = "1.0.0"
+description = "Structure-aware fuzzer and receipt generator for finite complexity-reduction verification workflows."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "Shawn Calvin Snelling / Axezent AI", email = "axezentai@Gmail.com"}]
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py"]
+addopts = "-q"

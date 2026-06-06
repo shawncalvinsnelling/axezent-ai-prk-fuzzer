@@ -1,0 +1,200 @@
+{
+  "files": [
+    {
+      "path": ".github/FUNDING.yml",
+      "sha256": "386a9fedb785d72182ffad6e254ca28b8546c3f2ff2c5395a4a7edf1315dbf92",
+      "size": 90
+    },
+    {
+      "path": ".github/workflows/main.yml",
+      "sha256": "c1bcc7b967c61a0d9b1ca73725a7379ef9d9b3fbc14f10e16a451c621623551e",
+      "size": 2236
+    },
+    {
+      "path": "BENCHMARKING.md",
+      "sha256": "ea6e056a1febb48636007b2bc5ac53c7e76999682e31682409e42e3c88cf9b07",
+      "size": 535
+    },
+    {
+      "path": "CITATION.cff",
+      "sha256": "01d275ffe099bc9766a5b1e002c2144e75b9127717acc5eb9a65e0c9b82e1723",
+      "size": 340
+    },
+    {
+      "path": "CLAIM_BOUNDARY.md",
+      "sha256": "5a53c2f85c90d988046a44967a6c3c855b8102f7e03e3409e436eaabfef72834",
+      "size": 686
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "sha256": "96f3dde82849b0a0c37dd4edf76bf6301abf54bda916f5c718d16986593ed492",
+      "size": 277
+    },
+    {
+      "path": "COMMERCIAL.md",
+      "sha256": "72bf587b5bb2a6d6286ec683a488e9fd8efe7803e9e1c7cf53dccd57b1d1e8a2",
+      "size": 690
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "acfea7e57c0c0ed047797a2eec29f2a8ed3ee96eb2719c183f9153c9c7f76224",
+      "size": 466
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "552f8955578e3334b9f1c4f8b1af430bd56cd54c54aa1c7548c40a48ba72f4c7",
+      "size": 273
+    },
+    {
+      "path": "DONATIONS.md",
+      "sha256": "5d5d7d19c4010ed24eb06827e347405fe9e3b12f2f2ba6a40d38bef1a04fc585",
+      "size": 313
+    },
+    {
+      "path": "ENTERPRISE.md",
+      "sha256": "fdfe1038435316107286d3fb6d7b575a5ed20e28c520552ff8766ae222defb6d",
+      "size": 591
+    },
+    {
+      "path": "FUZZING_SPEC.md",
+      "sha256": "edeacd6e936d8ebb232d0db48cd55246cae09cabdbcc030584c7834f0a264913",
+      "size": 768
+    },
+    {
+      "path": "GITHUB_FUNDING.yml",
+      "sha256": "6cf06434c31e82417415830240768c390134bd733f0c19ef08f08d2d5c867c52",
+      "size": 135
+    },
+    {
+      "path": "GITHUB_WORKFLOW_MAIN.yml",
+      "sha256": "c1bcc7b967c61a0d9b1ca73725a7379ef9d9b3fbc14f10e16a451c621623551e",
+      "size": 2236
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "e8c041a35f8158bd33c9d6494dd1dc8cba3184798ff37ca0945648767d019ca7",
+      "size": 1091
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "095c9926adfd7aa2796795cf4f4b072364b40dc0e5591faef749745eadcd69f2",
+      "size": 145
+    },
+    {
+      "path": "README.md",
+      "sha256": "1864553fe4480457512e0771b1f218725c120f5ba05162bad72949dd66989e80",
+      "size": 5625
+    },
+    {
+      "path": "RECEIPT_SPEC.md",
+      "sha256": "3581cbe6b90c50df3afcb8cedce7f53d3b4f38e1746ae6ec5e3622e3a4132842",
+      "size": 540
+    },
+    {
+      "path": "RELEASE.md",
+      "sha256": "7174176c2f103889f3f4eeea6ee5399b6d2ddf5dc7c3c54610b18e4aa975938c",
+      "size": 737
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "ea567b57c18513da6df3c81dcf4ed36b475b77a287f013d148c6a189a2caaa6d",
+      "size": 302
+    },
+    {
+      "path": "TESTED_STATUS.md",
+      "sha256": "6b6614533ee6019c16f50232323038dd0333148ce0cc998e9d4f51dc4c04fae1",
+      "size": 520
+    },
+    {
+      "path": "THREAT_MODEL.md",
+      "sha256": "cf6f5df531ca286b74c5e9656fe5f4fcad0c3013fca37c692663773349063be2",
+      "size": 656
+    },
+    {
+      "path": "UPLOAD_CHECKLIST.md",
+      "sha256": "9b54118fb0939d60180682ae292735f473a321c90afcdb67138d80ab348eed1d",
+      "size": 405
+    },
+    {
+      "path": "audit_sources.py",
+      "sha256": "b8457ab51320003259c9a6c85dcd7d2d3b27b68a00b873358c98f15d8bca1af0",
+      "size": 1296
+    },
+    {
+      "path": "axezent_ai_prk_fuzzer_receipt_v1.schema.json",
+      "sha256": "95c4946d9360ab5045556cd559a24414346e7d63ffcc68e5ef2141c63e43045c",
+      "size": 3407
+    },
+    {
+      "path": "lib.rs",
+      "sha256": "f502b9d7ffb5195ebdda53e7e74cf0f5903c3d0ea8744566d55ea08efe045745",
+      "size": 1051
+    },
+    {
+      "path": "main.rs",
+      "sha256": "fb2bb2df8d3bb5fd4549f2330a37edc1b48e3d820d3a6c181f015bd091ea7adf",
+      "size": 154
+    },
+    {
+      "path": "prk_fuzzer.py",
+      "sha256": "c1b219ecaf379a3aab30c27342132d26f9f6a068286b77632926362570448ccd",
+      "size": 15503
+    },
+    {
+      "path": "prk_oracle_checker.py",
+      "sha256": "909db41d9ebeb83eedc267e8e585dcd2ff5cf193bb2ea8393dca6cb73691824a",
+      "size": 10903
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "1cabdf53190019095a2453dae0f32d0952842b5884e8ddbcf37e1b1302dc5c29",
+      "size": 400
+    },
+    {
+      "path": "sample_generated_bad_assignment.json",
+      "sha256": "6fee5b758d9b9af783d0d1fddcbafa652ebc1dc8f72b109d8ead606fc3538e9f",
+      "size": 6847
+    },
+    {
+      "path": "sample_generated_bad_clique_duplicate.json",
+      "sha256": "512743bdc71b8e75e9ef84113c2ee2008b0baf3312491c8cae2978d0073c29db",
+      "size": 6808
+    },
+    {
+      "path": "sample_generated_bad_edge.json",
+      "sha256": "4c50549b19c7a2ce7c0b4306c8bcee81e23b1f15f2551657606b241730f814b4",
+      "size": 6819
+    },
+    {
+      "path": "sample_generated_bad_k.json",
+      "sha256": "d038f5a3b3be6e8a8f11681c2f285aa3f50d3443e7f86ad0e51eefe7580eb2a7",
+      "size": 6805
+    },
+    {
+      "path": "sample_generated_illegal_extra_edge.json",
+      "sha256": "907745aca70609a30ab64dad4f014c23c57450c078d63e87040e46b00e125dfd",
+      "size": 6929
+    },
+    {
+      "path": "sample_generated_valid.json",
+      "sha256": "ef6c19615e9d16712b3d08748cc540b88ac6c5eb30bff1ba74f2e6b66e93537a",
+      "size": 6785
+    },
+    {
+      "path": "test_fuzzer.py",
+      "sha256": "8c0cf0994779281878fb24321b14e14cd7f64b4037268a1fea7d1425530f3c4c",
+      "size": 3838
+    }
+  ],
+  "project": "Axezent AI PRK-Fuzzer & Receipt Generator",
+  "tested_summary": [
+    "valid generated receipt accepts",
+    "controlled bad receipts reject",
+    "pytest suite passes",
+    "benchmark mismatch count is zero",
+    "source audit passes",
+    "workflow YAML parses"
+  ],
+  "truth_boundary": "Finite receipt generation and stress testing only; no P vs NP or global solver-correctness claim.",
+  "version": "1.0.0"
+}

@@ -1,0 +1,14 @@
+[package]
+name = "axezent-prk-fuzzer-runtime"
+version = "1.0.0"
+edition = "2021"
+description = "Axezent AI PRK-Fuzzer runtime scaffold"
+license = "MIT"
+
+[lib]
+name = "axezent_prk_fuzzer_runtime"
+path = "lib.rs"
+
+[[bin]]
+name = "axezent-prk-fuzzer-runtime"
+path = "main.rs"

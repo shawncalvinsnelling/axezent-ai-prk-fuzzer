@@ -1,0 +1,440 @@
+{
+  "checker_expectation": {
+    "expected_result": "REJECT"
+  },
+  "claim_boundary": {
+    "does_claim": [
+      "finite 3SAT-to-CLIQUE receipt generated",
+      "constructed graph follows the textbook reduction for this finite instance",
+      "claimed witness is generated for this finite instance"
+    ],
+    "does_not_claim": [
+      "P=NP",
+      "global solver correctness",
+      "optimality of reductions",
+      "broad NP-complete claims"
+    ]
+  },
+  "fuzzer_metadata": {
+    "clause_count": 5,
+    "generator": "Axezent AI PRK Fuzzer",
+    "mutation": "bad_clique_duplicate_vertex",
+    "seed": 42,
+    "variable_count": 4
+  },
+  "input_instance": {
+    "clauses": [
+      [
+        "x2",
+        "x1",
+        "x4"
+      ],
+      [
+        "x1",
+        "x2",
+        "x1"
+      ],
+      [
+        "x4",
+        "~x4",
+        "x1"
+      ],
+      [
+        "x4",
+        "~x3",
+        "x2"
+      ],
+      [
+        "x1",
+        "x4",
+        "~x1"
+      ]
+    ],
+    "format": "3CNF",
+    "variables": [
+      "x1",
+      "x2",
+      "x3",
+      "x4"
+    ]
+  },
+  "receipt_sha256": "83c4fe88cc9685420208cd865945df5442a7ea04ed6c8590c98404918da664f1",
+  "reduction": {
+    "name": "3SAT_TO_CLIQUE",
+    "source_problem": "3SAT",
+    "target_problem": "CLIQUE",
+    "version": "1.0.0"
+  },
+  "schema": "AXEZENT-AI-PRK-RECEIPT-v1",
+  "target_instance": {
+    "edges": [
+      [
+        "c0_l0_x2",
+        "c1_l0_x1"
+      ],
+      [
+        "c0_l0_x2",
+        "c1_l1_x2"
+      ],
+      [
+        "c0_l0_x2",
+        "c1_l2_x1"
+      ],
+      [
+        "c0_l0_x2",
+        "c2_l0_x4"
+      ],
+      [
+        "c0_l0_x2",
+        "c2_l1_not_x4"
+      ],
+      [
+        "c0_l0_x2",
+        "c2_l2_x1"
+      ],
+      [
+        "c0_l0_x2",
+        "c3_l0_x4"
+      ],
+      [
+        "c0_l0_x2",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c0_l0_x2",
+        "c3_l2_x2"
+      ],
+      [
+        "c0_l0_x2",
+        "c4_l0_x1"
+      ],
+      [
+        "c0_l0_x2",
+        "c4_l1_x4"
+      ],
+      [
+        "c0_l0_x2",
+        "c4_l2_not_x1"
+      ],
+      [
+        "c0_l1_x1",
+        "c1_l0_x1"
+      ],
+      [
+        "c0_l1_x1",
+        "c1_l1_x2"
+      ],
+      [
+        "c0_l1_x1",
+        "c1_l2_x1"
+      ],
+      [
+        "c0_l1_x1",
+        "c2_l0_x4"
+      ],
+      [
+        "c0_l1_x1",
+        "c2_l1_not_x4"
+      ],
+      [
+        "c0_l1_x1",
+        "c2_l2_x1"
+      ],
+      [
+        "c0_l1_x1",
+        "c3_l0_x4"
+      ],
+      [
+        "c0_l1_x1",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c0_l1_x1",
+        "c3_l2_x2"
+      ],
+      [
+        "c0_l1_x1",
+        "c4_l0_x1"
+      ],
+      [
+        "c0_l1_x1",
+        "c4_l1_x4"
+      ],
+      [
+        "c0_l2_x4",
+        "c1_l0_x1"
+      ],
+      [
+        "c0_l2_x4",
+        "c1_l1_x2"
+      ],
+      [
+        "c0_l2_x4",
+        "c1_l2_x1"
+      ],
+      [
+        "c0_l2_x4",
+        "c2_l0_x4"
+      ],
+      [
+        "c0_l2_x4",
+        "c2_l2_x1"
+      ],
+      [
+        "c0_l2_x4",
+        "c3_l0_x4"
+      ],
+      [
+        "c0_l2_x4",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c0_l2_x4",
+        "c3_l2_x2"
+      ],
+      [
+        "c0_l2_x4",
+        "c4_l0_x1"
+      ],
+      [
+        "c0_l2_x4",
+        "c4_l1_x4"
+      ],
+      [
+        "c0_l2_x4",
+        "c4_l2_not_x1"
+      ],
+      [
+        "c1_l0_x1",
+        "c2_l0_x4"
+      ],
+      [
+        "c1_l0_x1",
+        "c2_l1_not_x4"
+      ],
+      [
+        "c1_l0_x1",
+        "c2_l2_x1"
+      ],
+      [
+        "c1_l0_x1",
+        "c3_l0_x4"
+      ],
+      [
+        "c1_l0_x1",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c1_l0_x1",
+        "c3_l2_x2"
+      ],
+      [
+        "c1_l0_x1",
+        "c4_l0_x1"
+      ],
+      [
+        "c1_l0_x1",
+        "c4_l1_x4"
+      ],
+      [
+        "c1_l1_x2",
+        "c2_l0_x4"
+      ],
+      [
+        "c1_l1_x2",
+        "c2_l1_not_x4"
+      ],
+      [
+        "c1_l1_x2",
+        "c2_l2_x1"
+      ],
+      [
+        "c1_l1_x2",
+        "c3_l0_x4"
+      ],
+      [
+        "c1_l1_x2",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c1_l1_x2",
+        "c3_l2_x2"
+      ],
+      [
+        "c1_l1_x2",
+        "c4_l0_x1"
+      ],
+      [
+        "c1_l1_x2",
+        "c4_l1_x4"
+      ],
+      [
+        "c1_l1_x2",
+        "c4_l2_not_x1"
+      ],
+      [
+        "c1_l2_x1",
+        "c2_l0_x4"
+      ],
+      [
+        "c1_l2_x1",
+        "c2_l1_not_x4"
+      ],
+      [
+        "c1_l2_x1",
+        "c2_l2_x1"
+      ],
+      [
+        "c1_l2_x1",
+        "c3_l0_x4"
+      ],
+      [
+        "c1_l2_x1",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c1_l2_x1",
+        "c3_l2_x2"
+      ],
+      [
+        "c1_l2_x1",
+        "c4_l0_x1"
+      ],
+      [
+        "c1_l2_x1",
+        "c4_l1_x4"
+      ],
+      [
+        "c2_l0_x4",
+        "c3_l0_x4"
+      ],
+      [
+        "c2_l0_x4",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c2_l0_x4",
+        "c3_l2_x2"
+      ],
+      [
+        "c2_l0_x4",
+        "c4_l0_x1"
+      ],
+      [
+        "c2_l0_x4",
+        "c4_l1_x4"
+      ],
+      [
+        "c2_l0_x4",
+        "c4_l2_not_x1"
+      ],
+      [
+        "c2_l1_not_x4",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c2_l1_not_x4",
+        "c3_l2_x2"
+      ],
+      [
+        "c2_l1_not_x4",
+        "c4_l0_x1"
+      ],
+      [
+        "c2_l1_not_x4",
+        "c4_l2_not_x1"
+      ],
+      [
+        "c2_l2_x1",
+        "c3_l0_x4"
+      ],
+      [
+        "c2_l2_x1",
+        "c3_l1_not_x3"
+      ],
+      [
+        "c2_l2_x1",
+        "c3_l2_x2"
+      ],
+      [
+        "c2_l2_x1",
+        "c4_l0_x1"
+      ],
+      [
+        "c2_l2_x1",
+        "c4_l1_x4"
+      ],
+      [
+        "c3_l0_x4",
+        "c4_l0_x1"
+      ],
+      [
+        "c3_l0_x4",
+        "c4_l1_x4"
+      ],
+      [
+        "c3_l0_x4",
+        "c4_l2_not_x1"
+      ],
+      [
+        "c3_l1_not_x3",
+        "c4_l0_x1"
+      ],
+      [
+        "c3_l1_not_x3",
+        "c4_l1_x4"
+      ],
+      [
+        "c3_l1_not_x3",
+        "c4_l2_not_x1"
+      ],
+      [
+        "c3_l2_x2",
+        "c4_l0_x1"
+      ],
+      [
+        "c3_l2_x2",
+        "c4_l1_x4"
+      ],
+      [
+        "c3_l2_x2",
+        "c4_l2_not_x1"
+      ]
+    ],
+    "format": "GRAPH_WITH_CLIQUE_PARAMETER",
+    "k": 5,
+    "vertices": [
+      "c0_l0_x2",
+      "c0_l1_x1",
+      "c0_l2_x4",
+      "c1_l0_x1",
+      "c1_l1_x2",
+      "c1_l2_x1",
+      "c2_l0_x4",
+      "c2_l1_not_x4",
+      "c2_l2_x1",
+      "c3_l0_x4",
+      "c3_l1_not_x3",
+      "c3_l2_x2",
+      "c4_l0_x1",
+      "c4_l1_x4",
+      "c4_l2_not_x1"
+    ]
+  },
+  "truth_label": "BOUNDED_FINITE_REDUCTION_CHECK",
+  "witness": {
+    "assignment": {
+      "x1": true,
+      "x2": true,
+      "x3": false,
+      "x4": true
+    },
+    "claimed_clique": [
+      "c0_l1_x1",
+      "c1_l2_x1",
+      "c2_l2_x1",
+      "c3_l0_x4",
+      "c0_l1_x1"
+    ]
+  }
+}
