@@ -1,0 +1,95 @@
+name: Axezent AI PRK Green CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+jobs:
+  python:
+    name: Python checker, fuzzer, and reduction receipts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run passing 3SAT-to-CLIQUE receipt
+        run: |
+          python prk_checker.py verify passing_3sat_to_clique_receipt.json
+      - name: Confirm bad-edge receipt rejects
+        run: |
+          set +e
+          python prk_checker.py verify failing_bad_edge_receipt.json
+          code=$?
+          if [ "$code" -ne 1 ]; then
+            echo "Expected bad-edge receipt to reject with exit code 1, got $code"
+            exit 1
+          fi
+      - name: Confirm bad-k receipt rejects
+        run: |
+          set +e
+          python prk_checker.py verify failing_bad_k_receipt.json
+          code=$?
+          if [ "$code" -ne 1 ]; then
+            echo "Expected bad-k receipt to reject with exit code 1, got $code"
+            exit 1
+          fi
+      - name: Confirm bad-assignment receipt rejects
+        run: |
+          set +e
+          python prk_checker.py verify failing_bad_assignment_receipt.json
+          code=$?
+          if [ "$code" -ne 1 ]; then
+            echo "Expected bad-assignment receipt to reject with exit code 1, got $code"
+            exit 1
+          fi
+      - name: Generate fuzzer smoke receipt
+        run: |
+          python prk_fuzzer.py generate-valid --variables 4 --clauses 5 --seed 42 --out ci_generated_valid.json
+          python prk_checker.py verify ci_generated_valid.json
+      - name: Generate and verify controlled fuzzer mutations
+        run: |
+          python prk_fuzzer.py mutate-bad-edge ci_generated_valid.json --out ci_bad_edge.json
+          python prk_fuzzer.py mutate-bad-k ci_generated_valid.json --out ci_bad_k.json
+          python prk_fuzzer.py mutate-bad-assignment ci_generated_valid.json --out ci_bad_assignment.json
+          python prk_fuzzer.py mutate-illegal-extra-edge ci_generated_valid.json --out ci_illegal_extra_edge.json
+          set +e
+          python prk_checker.py verify ci_bad_edge.json; code=$?; if [ "$code" -ne 1 ]; then exit 1; fi
+          python prk_checker.py verify ci_bad_k.json; code=$?; if [ "$code" -ne 1 ]; then exit 1; fi
+          python prk_checker.py verify ci_bad_assignment.json; code=$?; if [ "$code" -ne 1 ]; then exit 1; fi
+          python prk_checker.py verify ci_illegal_extra_edge.json; code=$?; if [ "$code" -ne 1 ]; then exit 1; fi
+      - name: Run Python unit tests
+        run: |
+          python -m unittest -v test_checker.py test_fuzzer.py
+  rust:
+    name: Rust runtime scaffold
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Run Rust tests
+        run: |
+          cargo test
+      - name: Run Rust demo
+        run: |
+          cargo run
+  source-audit:
+    name: Source audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Audit sources
+        run: |
+          python audit_sources.py
